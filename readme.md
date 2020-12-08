@@ -6,3 +6,6 @@ A proof of concept that does the following:
 2. Modify the image.
 3. Load the canvas content into an img element.
 4. Saves the canvas as an image serverside.
+
+[2. Drag & drop image upload sample with dropzone](https://github.com/jivanrij/frontend-samples/blob/master/dropzone.html)  
+Places 2 dropzones on the page and handles the upload with dropzone.php.

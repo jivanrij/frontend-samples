@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload image from canvas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="inc/dropzone/dropzone.min.js"></script>
+    <style>
+        #dropAreaOne {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        #dropAreaTwo {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div id="dropAreaOne">Drop area one</div>
+<div id="dropAreaTwo">Drop area two</div>
+<script>
+    var dzOne = new Dropzone('#dropAreaOne', {
+        url: "/dropzone.php",
+        previewsContainer: false,
+        accept: function(file, done) {
+            done();
+        }
+    });
+    var dzOne = new Dropzone('#dropAreaTwo', {
+        url: "/dropzone.php",
+        previewsContainer: false,
+        accept: function(file, done) {
+            done();
+        }
+    });
+</script>
+</body>
+</html>
