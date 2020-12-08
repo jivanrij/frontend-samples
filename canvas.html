@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload image from canvas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <button id="load-image">Load image in canvas</button><br />
+    <button id="rotate-image">Rotate image</button><br />
+    <button id="show-image">Load canvas image into img tag</button><br />
+    <button id="submit-form">Submit form with canvas image</button><br />
+
+    <canvas id="canvas" height="500" width="500"></canvas><br />
+
+    <img id="demo-image" /><br />
+
+    <script>
+        jQuery('#load-image').on('click', function(e){
+            var ctx = document.getElementById('canvas').getContext('2d');
+            var img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0);
+                ctx.beginPath();
+                ctx.stroke();
+            };
+            img.src = 'square-image.png';
+        });
+
+        jQuery('#rotate-image').on('click', function(e){
+            e.preventDefault();
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+
+            image = new Image();
+            // image.src = document.getElementById('canvas').toDataURL();
+            image.src = 'square-image.png';
+
+            var width = 400;
+            var height = 400;
+
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.rotate(45*Math.PI/180);
+            ctx.drawImage(image,-image.width/2,-image.width/2);
+            ctx.restore();
+        });
+
+        jQuery('#show-image').on('click', function(e){
+            e.preventDefault();
+            document.getElementById('demo-image').src = document.getElementById('canvas').toDataURL();
+        });
+
+        jQuery('#submit-form').on('click', function(e){
+           e.preventDefault();
+            jQuery.ajax({
+                type: "POST",
+                url: "canvas.php",
+                data: {
+                    imageData: document.getElementById('canvas').toDataURL()
+                }
+            }).done(function(response) {
+                console.log('saved: ' + response);
+            });
+        });
+
+    </script>
+</body>
+</html>
